@@ -1,29 +1,40 @@
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Zoom-into-the-oven splash intro. Plays once per browser tab session.
+// Oven-door intro: tap the oven to zoom through into the site.
+// Skips itself (no animation) on repeat visits within the same tab session.
 (function () {
-  const splash = document.getElementById('splash');
-  if (!splash) return;
+  const intro = document.getElementById('intro');
+  const site = document.getElementById('site');
+  if (!intro || !site) return;
 
-  const alreadySeen = sessionStorage.getItem('delightfull_splash_shown');
+  const alreadySeen = sessionStorage.getItem('delightfull_intro_shown');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function finishSplash() {
-    splash.classList.add('is-done');
-    document.body.style.overflow = '';
-    sessionStorage.setItem('delightfull_splash_shown', '1');
-    setTimeout(() => splash.remove(), 500);
+  function skipIntro() {
+    intro.style.display = 'none';
+    site.classList.add('visible');
+    sessionStorage.setItem('delightfull_intro_shown', '1');
   }
 
   if (alreadySeen || reducedMotion) {
-    splash.classList.add('skip-anim');
-    finishSplash();
+    skipIntro();
     return;
   }
 
-  document.body.style.overflow = 'hidden';
-  splash.addEventListener('click', finishSplash);
-  setTimeout(finishSplash, 1800);
+  function openOven() {
+    intro.classList.add('zooming');
+    site.classList.add('visible');
+    sessionStorage.setItem('delightfull_intro_shown', '1');
+    setTimeout(() => { intro.style.display = 'none'; }, 950);
+  }
+
+  intro.addEventListener('click', openOven);
+  intro.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openOven();
+    }
+  });
 })();
 
 const ovenBtn = document.getElementById('ovenBtn');
