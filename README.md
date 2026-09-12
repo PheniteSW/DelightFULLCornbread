@@ -10,9 +10,11 @@ client what a finished site could look like.
 - An interactive oven: click the oven icon in the "The Oven" section to zoom in
   on an animated baking scene (steam, glow). Pure CSS and JS, no extra
   libraries.
-- `images/` is empty on purpose. Drop in real photos named
-  `sweet-potato.jpg`, `blueberry.jpg`, `strawberry.jpg`, `banana.jpg` and the
-  site swaps them in automatically, over the placeholder art.
+- `images/` is empty on purpose. Drop in real photos with these exact names
+  and the site swaps them in automatically, over the placeholder art:
+  `sweet-potato.jpg`, `blueberry.jpg`, `strawberry.jpg`, `banana.jpg`,
+  `circle-pan.jpg`, `sheet-pan.jpg`, `loaf-pan.jpg`,
+  `individual-rectangles.jpg`.
 
 ## Running it locally
 
